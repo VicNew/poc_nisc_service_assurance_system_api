@@ -1,0 +1,161 @@
+#%RAML 1.0
+baseUri: https://mocksvc.mulesoft.com/mocks/6dde2a33-95f9-40af-9e39-5bd333a79c52 # 
+title: POC NISC Service Assurance System API
+version: 1.0.0
+protocols: [HTTP, HTTPS]
+mediaType: application/json
+
+schemas: 
+  networkServicesMessageSchema: !include schemas/NetworkServicesMessageSchema.json
+  networkServiceMessageSchema: !include schemas/NetworkServiceMessageSchema.json
+  errorMessageSchema: !include schemas/ApiErrorMessageSchema.json
+
+traits: 
+  orderable:
+    queryParameters:
+      orderBy:
+        description: |
+          Order by field: <<fieldsList>>
+        type: string
+        required: false
+      order:
+        description: Order
+        enum: [desc, asc]
+        default: desc
+        required: false
+  pageable:
+    queryParameters:
+      offset:
+        description: Skip over a number of elements by specifying an offset value for the query
+        type: integer
+        required: false
+        example: 20
+        default: 0
+      limit:
+        description: Limit the number of elements on the response
+        type: integer
+        required: false
+        example: 50
+        default: 10
+
+/network:
+  /service:
+    get:
+      displayName: Get Network Services
+      description: Get a list of Network Services by specific search.
+      is: [orderable: {fieldsList: "ServiceId"}, pageable]
+      queryParameters: 
+        Status: 
+          displayName: Network Services Status
+          description: Query all Network Services base on status
+          type: string
+          example: Active
+          required: false
+        Type: 
+          displayName: Network Services Type
+          description: Query all Network Services base on type
+          type: string
+          example: Internet
+          required: false
+        Zone: 
+          displayName: Network Services Zone
+          description: Query all Network Services base on zone
+          type: string
+          example: Center
+          required: false
+        FreeRackNumber: 
+          displayName: Network Services Free Rack Number
+          description: Query all Network Services base on free rack number
+          type: number
+          example: 50
+          required: false
+        PerformanceStatus: 
+          displayName: Network Services Performance Status
+          description: Query all Network Services base on performance status
+          type: string
+          example: OK
+          required: false
+        QualityServiceStatus: 
+          displayName: Network Services Quality Status
+          description: Query all Network Services base on quality status
+          type: string
+          example: OK
+          required: false
+      responses: 
+        200:
+          description: Return a list of Netwok Services
+          body: 
+            application/json:
+              schema: networkServicesMessageSchema
+              example: !include examples/NetworkServicesMessage.json
+        400:
+          description: The request could not be understood by the server due to malformed syntax. The request could not be understood by the server due to malformed syntax.
+          body: 
+            application/json:
+              schema: errorMessageSchema
+              example: !include examples/ApiErrorMessage.json
+        401:
+          description: If the request already included Authorization credentials, then the 401 response indicates that authorization has been refused for those credentials.
+          body: 
+            application/json:
+              schema: errorMessageSchema
+              example: !include examples/ApiErrorMessage.json
+        404:
+          description: The server has not found anything matching the Request-URI.
+          body: 
+            application/json:
+              schema: errorMessageSchema
+              example: !include examples/ApiErrorMessage.json
+        406:
+          description: The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.
+          body: 
+            application/json:
+              schema: errorMessageSchema
+              example: !include examples/ApiErrorMessage.json
+        500:
+          description: The server encountered an unexpected condition which prevented it from fulfilling the request.
+          body: 
+            application/json:
+              schema: errorMessageSchema
+              example: !include examples/ApiErrorMessage.json
+    /{id}:
+      get:
+        displayName: Get Network Service
+        description: Get full Network Services data by id.
+        responses: 
+          200:
+            description: The requested Network Service Information
+            body: 
+              application/json:
+                schema: networkServiceMessageSchema
+                example: !include examples/NetworkServiceMessage.json
+          400:
+            description: The request could not be understood by the server due to malformed syntax. The request could not be understood by the server due to malformed syntax.
+            body: 
+              application/json:
+                schema: errorMessageSchema
+                example: !include examples/ApiErrorMessage.json
+          401:
+            description: If the request already included Authorization credentials, then the 401 response indicates that authorization has been refused for those credentials.
+            body: 
+              application/json:
+                schema: errorMessageSchema
+                example: !include examples/ApiErrorMessage.json
+          404:
+            description: The server has not found anything matching the Request-URI.
+            body: 
+              application/json:
+                schema: errorMessageSchema
+                example: !include examples/ApiErrorMessage.json
+          406:
+            description: The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.
+            body: 
+              application/json:
+                schema: errorMessageSchema
+                example: !include examples/ApiErrorMessage.json
+          500:
+            description: The server encountered an unexpected condition which prevented it from fulfilling the request.
+            body: 
+              application/json:
+                schema: errorMessageSchema
+                example: !include examples/ApiErrorMessage.json

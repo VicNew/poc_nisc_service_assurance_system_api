@@ -1,0 +1,331 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://newtoms.com/root.json",
+  "type": "array",
+  "title": "Network Service Message Schema",
+  "items": {
+    "$id": "#/items",
+    "type": "object",
+    "title": "The Items Schema",
+    "required": [
+      "ServiceId",
+      "Name",
+      "Description",
+      "Status",
+      "Type",
+      "Zone",
+      "TotalRackNumber",
+      "FreeRackNumber",
+      "PerformanceStatus",
+      "QualityServiceStatus",
+      "NetworkTest",
+      "Traffic",
+      "TroubleTicket",
+      "Customers",
+      "links"
+    ],
+    "properties": {
+      "ServiceId": {
+        "$id": "#/items/properties/ServiceId",
+        "type": "integer",
+        "title": "The Serviceid Schema",
+        "default": 0,
+        "examples": [
+          1234
+        ]
+      },
+      "Name": {
+        "$id": "#/items/properties/Name",
+        "type": "string",
+        "title": "The Name Schema",
+        "default": "",
+        "examples": [
+          "Service Name"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "Description": {
+        "$id": "#/items/properties/Description",
+        "type": "string",
+        "title": "The Description Schema",
+        "default": "",
+        "examples": [
+          "Service Description"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "Status": {
+        "$id": "#/items/properties/Status",
+        "type": "string",
+        "title": "The Status Schema",
+        "default": "",
+        "examples": [
+          "Active"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "Type": {
+        "$id": "#/items/properties/Type",
+        "type": "string",
+        "title": "The Type Schema",
+        "default": "",
+        "examples": [
+          "Internet"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "Zone": {
+        "$id": "#/items/properties/Zone",
+        "type": "string",
+        "title": "The Zone Schema",
+        "default": "",
+        "examples": [
+          "Center"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "TotalRackNumber": {
+        "$id": "#/items/properties/TotalRackNumber",
+        "type": "integer",
+        "title": "The Totalracknumber Schema",
+        "default": 0,
+        "examples": [
+          100
+        ]
+      },
+      "FreeRackNumber": {
+        "$id": "#/items/properties/FreeRackNumber",
+        "type": "integer",
+        "title": "The Freeracknumber Schema",
+        "default": 0,
+        "examples": [
+          50
+        ]
+      },
+      "PerformanceStatus": {
+        "$id": "#/items/properties/PerformanceStatus",
+        "type": "string",
+        "title": "The Performancestatus Schema",
+        "default": "",
+        "examples": [
+          "OK"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "QualityServiceStatus": {
+        "$id": "#/items/properties/QualityServiceStatus",
+        "type": "string",
+        "title": "The Qualityservicestatus Schema",
+        "default": "",
+        "examples": [
+          "OK"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "NetworkTest": {
+        "$id": "#/items/properties/NetworkTest",
+        "type": "string",
+        "title": "The Networktest Schema",
+        "default": "",
+        "examples": [
+          "OK"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "Traffic": {
+        "$id": "#/items/properties/Traffic",
+        "type": "string",
+        "title": "The Traffic Schema",
+        "default": "",
+        "examples": [
+          "OK"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "TroubleTicket": {
+        "$id": "#/items/properties/TroubleTicket",
+        "type": "array",
+        "title": "The Troubleticket Schema",
+        "items": {
+          "$id": "#/items/properties/TroubleTicket/items",
+          "type": "object",
+          "title": "The Items Schema",
+          "required": [
+            "TicketId",
+            "link"
+          ],
+          "properties": {
+            "TicketId": {
+              "$id": "#/items/properties/TroubleTicket/items/properties/TicketId",
+              "type": "string",
+              "title": "The Ticketid Schema",
+              "default": "",
+              "examples": [
+                "1"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "link": {
+              "$id": "#/items/properties/TroubleTicket/items/properties/link",
+              "type": "object",
+              "title": "The Link Schema",
+              "required": [
+                "rel",
+                "uri",
+                "method"
+              ],
+              "properties": {
+                "rel": {
+                  "$id": "#/items/properties/TroubleTicket/items/properties/link/properties/rel",
+                  "type": "string",
+                  "title": "The Rel Schema",
+                  "default": "",
+                  "examples": [
+                    "/linkrels/networkService/ticket/info"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "uri": {
+                  "$id": "#/items/properties/TroubleTicket/items/properties/link/properties/uri",
+                  "type": "string",
+                  "title": "The Uri Schema",
+                  "default": "",
+                  "examples": [
+                    "/network/service/1234/ticket/1"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "method": {
+                  "$id": "#/items/properties/TroubleTicket/items/properties/link/properties/method",
+                  "type": "string",
+                  "title": "The Method Schema",
+                  "default": "",
+                  "examples": [
+                    "GET"
+                  ],
+                  "pattern": "^(.*)$"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Customers": {
+        "$id": "#/items/properties/Customers",
+        "type": "array",
+        "title": "The Customers Schema",
+        "items": {
+          "$id": "#/items/properties/Customers/items",
+          "type": "object",
+          "title": "The Items Schema",
+          "required": [
+            "CustomerId",
+            "link"
+          ],
+          "properties": {
+            "CustomerId": {
+              "$id": "#/items/properties/Customers/items/properties/CustomerId",
+              "type": "string",
+              "title": "The Customerid Schema",
+              "default": "",
+              "examples": [
+                "1"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "link": {
+              "$id": "#/items/properties/Customers/items/properties/link",
+              "type": "object",
+              "title": "The Link Schema",
+              "required": [
+                "rel",
+                "uri",
+                "method"
+              ],
+              "properties": {
+                "rel": {
+                  "$id": "#/items/properties/Customers/items/properties/link/properties/rel",
+                  "type": "string",
+                  "title": "The Rel Schema",
+                  "default": "",
+                  "examples": [
+                    "/linkrels/networkService/Customer/info"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "uri": {
+                  "$id": "#/items/properties/Customers/items/properties/link/properties/uri",
+                  "type": "string",
+                  "title": "The Uri Schema",
+                  "default": "",
+                  "examples": [
+                    "/network/service/1234/customer/1"
+                  ],
+                  "pattern": "^(.*)$"
+                },
+                "method": {
+                  "$id": "#/items/properties/Customers/items/properties/link/properties/method",
+                  "type": "string",
+                  "title": "The Method Schema",
+                  "default": "",
+                  "examples": [
+                    "GET"
+                  ],
+                  "pattern": "^(.*)$"
+                }
+              }
+            }
+          }
+        }
+      },
+      "links": {
+        "$id": "#/items/properties/links",
+        "type": "array",
+        "title": "The Links Schema",
+        "items": {
+          "$id": "#/items/properties/links/items",
+          "type": "object",
+          "title": "The Items Schema",
+          "required": [
+            "rel",
+            "uri",
+            "method"
+          ],
+          "properties": {
+            "rel": {
+              "$id": "#/items/properties/links/items/properties/rel",
+              "type": "string",
+              "title": "The Rel Schema",
+              "default": "",
+              "examples": [
+                "/linkrels/networkService/info"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "uri": {
+              "$id": "#/items/properties/links/items/properties/uri",
+              "type": "string",
+              "title": "The Uri Schema",
+              "default": "",
+              "examples": [
+                "/network/service/1234"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "method": {
+              "$id": "#/items/properties/links/items/properties/method",
+              "type": "string",
+              "title": "The Method Schema",
+              "default": "",
+              "examples": [
+                "GET"
+              ],
+              "pattern": "^(.*)$"
+            }
+          }
+        }
+      }
+    }
+  }
+}
