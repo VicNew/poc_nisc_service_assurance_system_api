@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+    <munit:config mock-connectors="false" mock-inbounds="false" name="munit" doc:name="MUnit configuration"/>
+    <sub-flow name="setExpectedVarErrorMessage500">
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-variable variableName="errorMessage500"><![CDATA[%dw 1.0
+%output application/json
+---
+{
+   error:{
+      errors:[
+         {
+            id:"500",
+            code:"ERR500",
+            status:"500",
+            title:"Internal Server Error",
+            detail:"Internal Server Error For Munit TEST. (java.lang.Exception).",
+            href:"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html"
+         }
+      ]
+   }
+}]]></dw:set-variable>
+        </dw:transform-message>
+    </sub-flow>
+    <sub-flow name="setExpectedVarErrorMessage406">
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-variable variableName="errorMessage406"><![CDATA[%dw 1.0
+%output application/json
+---
+{
+   error:{
+      errors:[
+         {
+            id:"406",
+            code:"ERR406",
+            status:"406",
+            title:"Not Acceptable",
+            detail:"The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
+            href:"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html"
+         }
+      ]
+   }
+}]]></dw:set-variable>
+        </dw:transform-message>
+    </sub-flow>
+    <sub-flow name="setExpectedVarErrorMessage405">
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-variable variableName="errorMessage405"><![CDATA[%dw 1.0
+%output application/json
+---
+{
+   error:{
+      errors:[
+         {
+            id:"405",
+            code:"ERR405",
+            status:"405",
+            title:"Method Not Allowed",
+            detail:"The method specified in the Request-Line is not allowed for the resource identified by the Request-URI. The response MUST include an Allow header containing a list of valid methods for the requested resource.",
+            href:"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html"
+         }
+      ]
+   }
+}]]></dw:set-variable>
+        </dw:transform-message>
+    </sub-flow>
+    <sub-flow name="setExpectedVarErrorMessage404">
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-variable variableName="errorMessage404"><![CDATA[%dw 1.0
+%output application/json
+---
+{
+   error:{
+      errors:[
+         {
+            id:"404",
+            code:"ERR404",
+            status:"404",
+            title:"Not Found",
+            detail:"The server has not found anything matching the Request-URI.",
+            href:"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html"
+         }
+      ]
+   }
+}]]></dw:set-variable>
+        </dw:transform-message>
+    </sub-flow>
+    <sub-flow name="setExpectedVarErrorMessage400">
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-variable variableName="errorMessage400"><![CDATA[%dw 1.0
+%output application/json
+---
+{
+   error:{
+      errors:[
+         {
+            id:"400",
+            code:"ERR400",
+            status:"400",
+            title:"Bad Request",
+            detail:"The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.",
+            href:"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html"
+         }
+      ]
+   }
+}]]></dw:set-variable>
+        </dw:transform-message>
+    </sub-flow>
+    <sub-flow name="setExpectedGetAllNetworkServicesResponse">
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-variable variableName="expectedGetAllNetworkServicesResponse"><![CDATA[%dw 1.0
+%output application/json
+---
+[
+   {
+      ServiceId:1234,
+      Name:"Service Name",
+      Description:"Service Description",
+      Status:"Active",
+      Type:"Internet",
+      Zone:"Center",
+      TotalRackNumber:100,
+      FreeRackNumber:50,
+      PerformanceStatus:"OK",
+      QualityServiceStatus:"OK",
+      NetworkTest:"OK",
+      Traffic:"OK",
+      TroubleTicket:[
+         {
+            TicketId:"1",
+            link:{
+               rel:"/linkrels/networkService/ticket/info",
+               uri:"/network/service/1234/ticket/1",
+               method:"GET"
+            }
+         },
+         {
+            TicketId:"2",
+            link:{
+               rel:"/linkrels/networkService/ticket/info",
+               uri:"/network/service/1234/ticket/2",
+               method:"GET"
+            }
+         }
+      ],
+      Customers:[
+         {
+            CustomerId:"1",
+            link:{
+               rel:"/linkrels/networkService/Customer/info",
+               uri:"/network/service/1234/customer/1",
+               method:"GET"
+            }
+         },
+         {
+            CustomerId:"2",
+            link:{
+               rel:"/linkrels/networkService/Customer/info",
+               uri:"/network/service/1234/customer/1",
+               method:"GET"
+            }
+         }
+      ],
+      links:[
+         {
+            rel:"/linkrels/networkService/info",
+            uri:"/network/service/1234",
+            method:"GET"
+         },
+         {
+            rel:"/linkrels/networkService/updateInfo",
+            uri:"/network/service/1234",
+            method:"PUT"
+         },
+         {
+            rel:"/linkrels/networkService/delete",
+            uri:"/network/service/1234",
+            method:"DELETE"
+         }
+      ]
+   },
+   {
+      ServiceId:5678,
+      Name:"Service Name",
+      Description:"Service Description",
+      Status:"Active",
+      Type:"Internet",
+      Zone:"Center",
+      TotalRackNumber:100,
+      FreeRackNumber:50,
+      PerformanceStatus:"OK",
+      QualityServiceStatus:"OK",
+      NetworkTest:"OK",
+      Traffic:"OK",
+      TroubleTicket:[
+         {
+            TicketId:"3",
+            link:{
+               rel:"/linkrels/networkService/ticket/info",
+               uri:"/network/service/1234/ticket/3",
+               method:"GET"
+            }
+         },
+         {
+            TicketId:"4",
+            link:{
+               rel:"/linkrels/networkService/ticket/info",
+               uri:"/network/service/1234/ticket/4",
+               method:"GET"
+            }
+         }
+      ],
+      Customers:[
+         {
+            CustomerId:"3",
+            link:{
+               rel:"/linkrels/networkService/Customer/info",
+               uri:"/network/service/1234/customer/3",
+               method:"GET"
+            }
+         },
+         {
+            CustomerId:"4",
+            link:{
+               rel:"/linkrels/networkService/Customer/info",
+               uri:"/network/service/1234/customer/4",
+               method:"GET"
+            }
+         }
+      ],
+      links:[
+         {
+            rel:"/linkrels/networkService/info",
+            uri:"/network/service/5678",
+            method:"GET"
+         },
+         {
+            rel:"/linkrels/networkService/updateInfo",
+            uri:"/network/service/5678",
+            method:"PUT"
+         },
+         {
+            rel:"/linkrels/networkService/delete",
+            uri:"/network/service/5678",
+            method:"DELETE"
+         }
+      ]
+   }
+]]]></dw:set-variable>
+        </dw:transform-message>
+    </sub-flow>
+    <sub-flow name="setExpectedGetByIdNetworkServiceResponse">
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-variable variableName="expectedGetByIdNetworkServiceResponse"><![CDATA[%dw 1.0
+%output application/json
+---
+{
+   ServiceId:1234,
+   Name:"Service Name",
+   Description:"Service Description",
+   Status:"Active",
+   Type:"Internet",
+   Zone:"Center",
+   TotalRackNumber:100,
+   FreeRackNumber:50,
+   PerformanceStatus:"OK",
+   QualityServiceStatus:"OK",
+   NetworkTest:"OK",
+   Traffic:"OK",
+   TroubleTicket:[
+      {
+         TicketId:"1",
+         link:{
+            rel:"/linkrels/networkService/ticket/info",
+            uri:"/network/service/1234/ticket/1",
+            method:"GET"
+         }
+      },
+      {
+         TicketId:"2",
+         link:{
+            rel:"/linkrels/networkService/ticket/info",
+            uri:"/network/service/1234/ticket/2",
+            method:"GET"
+         }
+      }
+   ],
+   Customers:[
+      {
+         CustomerId:"1",
+         link:{
+            rel:"/linkrels/networkService/Customer/info",
+            uri:"/network/service/1234/customer/1",
+            method:"GET"
+         }
+      },
+      {
+         CustomerId:"2",
+         link:{
+            rel:"/linkrels/networkService/Customer/info",
+            uri:"/network/service/1234/customer/1",
+            method:"GET"
+         }
+      }
+   ],
+   links:[
+      {
+         rel:"/linkrels/networkService/info",
+         uri:"/network/service/1234",
+         method:"GET"
+      },
+      {
+         rel:"/linkrels/networkService/updateInfo",
+         uri:"/network/service/1234",
+         method:"PUT"
+      },
+      {
+         rel:"/linkrels/networkService/delete",
+         uri:"/network/service/1234",
+         method:"DELETE"
+      }
+   ]
+}]]></dw:set-variable>
+        </dw:transform-message>
+    </sub-flow>
+</mule>
